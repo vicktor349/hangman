@@ -34,9 +34,10 @@ type KeyboardProps = {
     activeLetter: string[]
     inactiveLetters: string[]
     addGuessedLetter: (letter: string) => void
+    disabled?: boolean
 }
 
-const Keyboard = ({ activeLetter, inactiveLetters, addGuessedLetter }: KeyboardProps) => {
+const Keyboard = ({ activeLetter, inactiveLetters, addGuessedLetter, disabled = false }: KeyboardProps) => {
     return (
         <div className='grid grid-cols-auto-fit-minmax gap-2'>
             {KEYS.map(key => {
@@ -44,7 +45,7 @@ const Keyboard = ({ activeLetter, inactiveLetters, addGuessedLetter }: KeyboardP
                 const isInActive = inactiveLetters.includes(key)
                 return (
                     <button onClick={() => addGuessedLetter(key)}
-                        disabled={isInActive || isActive}
+                        disabled={isInActive || isActive || disabled}
                         className={`${styles.btn} ${isActive ? styles.active : ""} ${isInActive ? styles.inactive : ""}`}
                         key={key}>
                         {key}
