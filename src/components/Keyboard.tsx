@@ -30,12 +30,27 @@ const KEYS = [
     "z",
 ]
 
-const Keyboard = () => {
+type KeyboardProps = {
+    activeLetter: string[]
+    inactiveLetters: string[]
+    addGuessedLetter: (letter: string) => void
+}
+
+const Keyboard = ({ activeLetter, inactiveLetters, addGuessedLetter }: KeyboardProps) => {
     return (
         <div className='grid grid-cols-auto-fit-minmax gap-2'>
-            {KEYS.map(key => (
-                <button className={`${styles.btn}`} key={key}>{key}</button>
-            ))}
+            {KEYS.map(key => {
+                const isActive = activeLetter.includes(key)
+                const isInActive = inactiveLetters.includes(key)
+                return (
+                    <button onClick={() => addGuessedLetter(key)}
+                        disabled={isInActive || isActive}
+                        className={`${styles.btn} ${isActive ? styles.active : ""} ${isInActive ? styles.inactive : ""}`}
+                        key={key}>
+                        {key}
+                    </button>
+                )
+            })}
         </div>
     )
 }
