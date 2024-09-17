@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className='w-[800px] flex flex-col gap-8 mx-auto items-center'>
-      <p>Press Enter to get a new word!</p>
+      <p className='text-center text-2xl font-semibold'>Press Enter to get a new word!</p>
       <div className='text-3xl text-center'>
         {isWinner && "Winner! - Refresh to try again"}
         {isLoser && "Nice Try - Refresh to try again"}
